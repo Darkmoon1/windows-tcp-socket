@@ -8,7 +8,7 @@
 void Send(SOCKET sockClient)
 {
 	char sendBuff[100];
-	char buff[1000];
+	char buff[1024];
 	int byte = 0;
 	char sw = 'l';
 
@@ -65,14 +65,14 @@ void Send(SOCKET sockClient)
 
 void Recv(SOCKET sockClient)
 {
-	char revBuff[1000];
+	char revBuff[1024];
 	int byte = 0;
-	printf("Input l to recv text or f to recv file q to exit");
-	char sw = 'l';
-	scanf("%c", &sw);
-	getchar();
 	while (true)
 	{
+		printf("Input l to recv text or f to recv file q to exit\n");
+		char sw = 'l';
+		scanf("%c", &sw);
+		getchar();
 		if ('l' == sw)
 		{
 			byte = recv(sockClient, revBuff, strlen(revBuff) + 1, 0);
@@ -89,24 +89,35 @@ void Recv(SOCKET sockClient)
 		else if ('f' == sw)
 		{
 			FILE *fp = NULL;
-			if ((fp = fopen("received", "wb+")) == NULL)
+			if ((fp = fopen("received.txt", "wb+")) == NULL)
 			{
 				printf("open file failed...\n");
 				break;
 			}
+			memset(revBuff, 0, 1024);
 			size_t size = 0;
-			do
+			//do
+			//{
+			//	size = recv(sockClient, revBuff, sizeof(revBuff), MSG_WAITALL);
+			//	if (size == SOCKET_ERROR)
+			//	{
+			//		break;
+			//	}
+			//	fwrite(revBuff, size, 1, fp);
+
+			//} while (size == sizeof(revBuff));
+
+			while ((size = recv(sockClient, revBuff, sizeof(revBuff), 0))>0)
 			{
-				size = recv(sockClient, revBuff, sizeof(revBuff), MSG_WAITALL);
-				if (size == SOCKET_ERROR)
+				if (fwrite(revBuff,sizeof(char),size,fp)<size)
 				{
+					printf("Write failed\n");
 					break;
 				}
-				fwrite(revBuff, size, 1, fp);
-
-			} while (size == sizeof(revBuff));
-			fclose(fp);
-			printf("recv finished.\n");
+				fclose(fp);
+				printf("recv finished.\n");
+				break;
+			}
 		}
 		else if ('q'==sw)
 		{
@@ -114,7 +125,7 @@ void Recv(SOCKET sockClient)
 		}
 		else
 		{
-			printf("input error");
+			printf("input error\n");
 		}
 	}
 	closesocket(sockClient);
@@ -176,6 +187,7 @@ void main(int argc, char *argv[])
 		{
 			while(connectionSocket == SOCKET_ERROR)
 			{
+				printf("Waiting connection....\n");
 				connectionSocket = accept(welcomeSocket, NULL, NULL);
 				printf("Accept Failed Try Again...\n");
 			}
@@ -212,7 +224,8 @@ void main(int argc, char *argv[])
 
 
 	}
-
+	closesocket(welcomeSocket);
+	WSACleanup();
 	return;
 }
 

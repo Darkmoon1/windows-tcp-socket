@@ -8,14 +8,15 @@
 void Send(SOCKET sockSever)
 {
 	char sendBuff[100];
-	char buff[1000];
+	char buff[1024];
 	int byte = 0;
 	char sw = 'l';
 
 	while (true)
 	{
-		printf("Input what you want...\n l to send text f to send file\n");
+		printf("Input what you want...\n l to send text f to send file q to exit\n");
 		scanf("%s %c", sendBuff, &sw);
+		getchar();
 		if ('l' == sw)
 		{
 			byte = send(sockSever, sendBuff, strlen(sendBuff) + 1, 0);
@@ -45,12 +46,16 @@ void Send(SOCKET sockSever)
 				}
 
 			}
-
+			printf("Send Successfully\n");
+			fclose(fp);
+		}
+		else if ('q'==sw)
+		{
+			break;
 		}
 		else
 		{
-			printf("input error exit");
-			break;
+			printf("input error \n");
 		}
 
 
@@ -61,12 +66,14 @@ void Send(SOCKET sockSever)
 
 void Recv(SOCKET sockSever)
 {
-	char revBuff[1000];
+	char revBuff[1024];
 	int byte = 0;
 	char sw = 'l';
-	scanf("%c", &sw);
 	while (true)
 	{
+		printf("l to recv text f to recv file q to exit\n");
+		scanf("%c", &sw);
+		getchar();
 		if ('l'==sw)
 		{
 			byte = recv(sockSever, revBuff, strlen(revBuff) + 1, 0);
@@ -83,24 +90,43 @@ void Recv(SOCKET sockSever)
 		else if ('f'==sw)
 		{
 			FILE *fp = NULL;
-			if ((fp = fopen("received", "wb+")) == NULL)
+			if ((fp = fopen("received.txt", "wb+")) == NULL)
 			{
 				printf("open file failed...\n");
 				break;
 			}
 			size_t size = 0;
-			do
+			memset(revBuff, 0, 1024);
+			//do
+			//{
+			//	size = recv(socksever, revbuff, sizeof(revbuff), msg_waitall);
+			//	if (size == socket_error)
+			//	{
+			//		break;
+			//	}
+			//	fwrite(revbuff, size, 1, fp);
+
+			//} while (size == sizeof(revbuff));
+			while ((size = recv(sockSever,revBuff,sizeof(revBuff),0)) >0)
 			{
-				size = recv(sockSever, revBuff, sizeof(revBuff), MSG_WAITALL);
-				if (size == SOCKET_ERROR)
+				if (fwrite(revBuff,sizeof(char),size,fp)<size)
 				{
+					printf("Write failed\n");
 					break;
 				}
-				fwrite(revBuff, size, 1, fp);
+				fclose(fp);
+				printf("recv finished\n");
+				break;
+			}
 
-			} while (size == sizeof(revBuff));
-			fclose(fp);
-			printf("recv finished.\n");
+		}
+		else if ('q' == sw)
+		{
+			break;
+		}
+		else
+		{
+			printf("Input error");
 		}
 	}
 	closesocket(sockSever);
@@ -132,7 +158,7 @@ void main(int argc, char *argv[])
 	printf("Input serverIp..\n");
 	char ip[20];
 	scanf("%s", ip);
-
+	getchar();
 	clientService.sin_family = AF_INET;
 	clientService.sin_addr.s_addr = inet_addr(ip);
 	clientService.sin_port = htons(6666);
@@ -141,6 +167,7 @@ void main(int argc, char *argv[])
 	{
 		printf("Failed to connect.\n");
 		WSACleanup();
+		system("pause");
 		return;
 	}
 
@@ -148,7 +175,9 @@ void main(int argc, char *argv[])
 	while (1)
 	{
 		char select;
+		printf("Input s to get start...\n");
 		scanf("%c", &select);
+		getchar();
 		if ('s' != select)
 		{
 			printf("Input s to get start...\n");
@@ -156,10 +185,11 @@ void main(int argc, char *argv[])
 		}
 		else
 		{
-			printf("connect successfully!\nInput 1 to send file or 2 to recv file\n");
 			while (1)
 			{
+				printf("connect successfully!\nInput 1 to send file or 2 to recv file q to exit\n");
 				scanf("%c", &select);
+				getchar();
 				if ('1' == select)
 				{
 					HANDLE hTread1 = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)Send, (LPVOID)client, 0, 0);
@@ -171,6 +201,10 @@ void main(int argc, char *argv[])
 					HANDLE hTread2 = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)Recv, (LPVOID)client, 0, 0);
 					WaitForSingleObject(hTread2, INFINITE);
 					CloseHandle(hTread2);
+				}
+				else if ('q' == select)
+				{
+					break;
 				}
 				else
 				{
@@ -184,6 +218,8 @@ void main(int argc, char *argv[])
 
 
 	}
+	closesocket(client);
+	WSACleanup();
 }
 
 
