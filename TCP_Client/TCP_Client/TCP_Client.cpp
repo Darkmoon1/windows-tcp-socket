@@ -60,8 +60,7 @@ void Send(SOCKET sockSever)
 
 
 	}
-	shutdown(sockSever, SD_SEND);
-	closesocket(sockSever);
+
 }
 
 void Recv(SOCKET sockSever)
@@ -129,7 +128,6 @@ void Recv(SOCKET sockSever)
 			printf("Input error");
 		}
 	}
-	closesocket(sockSever);
 }
 
 
@@ -204,6 +202,7 @@ void main(int argc, char *argv[])
 				}
 				else if ('q' == select)
 				{
+					shutdown(client, SD_SEND);
 					break;
 				}
 				else

@@ -1,19 +1,22 @@
 ﻿  TCP_Client.cpp
-c:\users\86427\documents\visual studio 2015\projects\tcp_client\tcp_client\tcp_client.cpp(18): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+d:\documents\github\windows-tcp-socket\tcp_client\tcp_client\tcp_client.cpp(18): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1270): note: 参见“scanf”的声明
-c:\users\86427\documents\visual studio 2015\projects\tcp_client\tcp_client\tcp_client.cpp(32): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+d:\documents\github\windows-tcp-socket\tcp_client\tcp_client\tcp_client.cpp(32): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: 参见“fopen”的声明
-c:\users\86427\documents\visual studio 2015\projects\tcp_client\tcp_client\tcp_client.cpp(75): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+d:\documents\github\windows-tcp-socket\tcp_client\tcp_client\tcp_client.cpp(74): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1270): note: 参见“scanf”的声明
-c:\users\86427\documents\visual studio 2015\projects\tcp_client\tcp_client\tcp_client.cpp(93): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+d:\documents\github\windows-tcp-socket\tcp_client\tcp_client\tcp_client.cpp(92): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: 参见“fopen”的声明
-c:\users\86427\documents\visual studio 2015\projects\tcp_client\tcp_client\tcp_client.cpp(160): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+d:\documents\github\windows-tcp-socket\tcp_client\tcp_client\tcp_client.cpp(158): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1270): note: 参见“scanf”的声明
-c:\users\86427\documents\visual studio 2015\projects\tcp_client\tcp_client\tcp_client.cpp(163): warning C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+d:\documents\github\windows-tcp-socket\tcp_client\tcp_client\tcp_client.cpp(161): warning C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
   c:\program files (x86)\windows kits\8.1\include\um\winsock2.h(1850): note: 参见“inet_addr”的声明
-c:\users\86427\documents\visual studio 2015\projects\tcp_client\tcp_client\tcp_client.cpp(179): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+d:\documents\github\windows-tcp-socket\tcp_client\tcp_client\tcp_client.cpp(177): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1270): note: 参见“scanf”的声明
-c:\users\86427\documents\visual studio 2015\projects\tcp_client\tcp_client\tcp_client.cpp(191): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+d:\documents\github\windows-tcp-socket\tcp_client\tcp_client\tcp_client.cpp(189): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1270): note: 参见“scanf”的声明
-  TCP_Client.vcxproj -> C:\Users\86427\Documents\Visual Studio 2015\Projects\TCP_Client\Debug\TCP_Client.exe
-  TCP_Client.vcxproj -> C:\Users\86427\Documents\Visual Studio 2015\Projects\TCP_Client\Debug\TCP_Client.pdb (Full PDB)
+  stdafx.cpp
+  正在生成代码...
+  LINK : 没有找到 D:\Documents\GitHub\windows-tcp-socket\TCP_Client\Debug\TCP_Client.exe 或上一个增量链接没有生成它；正在执行完全链接
+  TCP_Client.vcxproj -> D:\Documents\GitHub\windows-tcp-socket\TCP_Client\Debug\TCP_Client.exe
+  TCP_Client.vcxproj -> D:\Documents\GitHub\windows-tcp-socket\TCP_Client\Debug\TCP_Client.pdb (Full PDB)

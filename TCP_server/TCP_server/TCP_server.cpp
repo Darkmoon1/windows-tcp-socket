@@ -25,6 +25,7 @@ void Send(SOCKET sockClient)
 				printf("send failed.\n");
 				break;
 			}
+
 		}
 		else if ('f' == sw)
 		{
@@ -44,8 +45,9 @@ void Send(SOCKET sockClient)
 					printf("Send file failed...\n");
 					break;
 				}
-
 			}
+			printf("Send successfully\n");
+			fclose(fp);
 			
 		}
 		else if ('q'==sw)
@@ -59,8 +61,7 @@ void Send(SOCKET sockClient)
 
 		
 	}
-	shutdown(sockClient, SD_SEND);
-	closesocket(sockClient);
+
 }
 
 void Recv(SOCKET sockClient)
@@ -128,7 +129,6 @@ void Recv(SOCKET sockClient)
 			printf("input error\n");
 		}
 	}
-	closesocket(sockClient);
 }
 
 void main(int argc, char *argv[])
@@ -210,6 +210,8 @@ void main(int argc, char *argv[])
 				}
 				else if ('q' == select)
 				{
+					shutdown(connectionSocket, SD_SEND);
+					closesocket(connectionSocket);
 					break;
 				}
 				else
